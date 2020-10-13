@@ -21,16 +21,14 @@ const player = {
     player.bindEvents();
     player.play();
   },
-
   bindEvents: () => {
     for (let key in player.events) {
       if (player.events.hasOwnProperty(key)) {
-        const value = player.events[key];
+        const value = player.events[key]; // pause / play / slow
         document.querySelector(key).onclick = player[value];
       }
     }
   },
-
   run: () => {
     player.n += 1;
     if (player.n > string.length) {
@@ -39,9 +37,10 @@ const player = {
     }
     player.ui.demo.innerText = string.substr(0, player.n);
     player.ui.demo2.innerHTML = string.substr(0, player.n);
-    player.ui.demo.scrollTop = demo.scrollHeight;
+    player.ui.demo.scrollTop = player.ui.demo.scrollHeight;
   },
   play: () => {
+    window.clearInterval(player.id);
     player.id = setInterval(player.run, player.time);
   },
   pause: () => {
